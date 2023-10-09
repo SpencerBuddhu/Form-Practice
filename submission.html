@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submission</title>
+    <meta charset="UTF-8">
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #333;
+            background-color: #3f3d3d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 14px;
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 4px;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        label {
+            color: #333;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        select {
+            font-size: 12px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        select {
+            height: auto;
+        }
+
+        p {
+            font-size: 12px;
+            color: #777;
+            margin: 5px 0;
+        }
+
+        button[type="submit"] {
+            font-size: 12px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            align-self: flex-start;
+            margin-top: 20px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Please fill this form to submit your project request. Our team will evaluate all submissions and allocate resources to all approved projects</h1>
+    
+<form onsubmit="return validateTextField()">
+        
+    <label for="name">Project Name *</label>
+    <input type="text" id="name" maxlength="50" required>
+    <p>Character limit of 50</p>
+    
+<br>
+
+    <label for="chargecode">Project Chargecode *</label>
+    <input type="text" id="chargecode" minlength="10" required>
+    <p>Minimum field length is 10 characters and the first character must start with an E, I, or M</p>
+
+<br>
+
+    <label for="region">Region *</label>
+    <select id="region" multiple size="3" required>
+        <option value ="option1">Eastern</option>
+        <option value ="option2">Western</option>
+        <option value ="option3">Central</option>
+    </select>
+
+<br>
+<br>
+
+   <label for="request">Request Type *</label>
+    <select id="request" onchange="showfield(this.options[this.selectedIndex].value)" required>
+        <option value ="option1">New</option>
+        <option value ="option2">Enhancement</option>
+        <option value ="option3">Other</option>
+    </select>
+    <div id ="div1"></div>
+
+<br>
+
+    <label for="date">Target Deadline *</label>
+    <input type="date" id="date" min="" required>
+
+<button type="submit">Submit</button>
+    
+</form>
+   
+<script>
+function validateTextField() {
+    const textField = document.getElementById('chargecode');
+    const firstChar = textField.value.charAt(0);
+
+    if (firstChar !== 'E' && firstChar !== 'I' && firstChar !== 'M') {
+        alert('The first character of the test field must be E, I, or M.');
+        return false;
+    }
+    alert('Thank you for submitting a project with our team! We will reach out to discuss the project in more detail')    
+    return true;
+}
+</script>
+
+
+<script type="text/javascript">
+        function showfield(name){
+            if(name==='option3')document.getElementById('div1').innerHTML='Other Defined: <input type="text" name="other" />';
+            else document.getElementById('div1').innerHTML='';
+        }
+</script>
+    
+    
+<script>
+        const dateInput = document.getElementById('date');
+        const today = new Date();
+        const formatToday = today.toISOString().split('T')[0];
+        dateInput.min = formatToday;
+</script>
+
+
+</body>
+</html>
